@@ -1,39 +1,24 @@
-function gerarCampos() {
-  const quantidade = parseInt(document.getElementById('quantidade').value);
-  const container = document.getElementById('inputs-container');
-  const calcularBtn = document.getElementById('calcularBtn');
+let quantidade = parseInt(prompt("Quantos números você deseja digitar?"));
 
-  container.innerHTML = ''; // limpa campos anteriores
 
-  if (!quantidade || quantidade <= 0) {
-    alert('Digite um número válido!');
-    return;
-  }
-
-  for (let i = 1; i <= quantidade; i++) {
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.placeholder = `Número ${i}`;
-    input.className = 'numero';
-    container.appendChild(input);
-  }
-
-  calcularBtn.style.display = 'block';
-}
-
-function calcularMedia() {
-  const inputs = document.querySelectorAll('.numero');
+if (isNaN(quantidade) || quantidade <= 0) {
+  alert("Por favor, digite um número válido maior que zero.");
+} else {
   let soma = 0;
 
-  for (const input of inputs) {
-    const valor = parseFloat(input.value);
-    if (isNaN(valor)) {
-      alert('Preencha todos os campos com números!');
-      return;
+  for (let i = 1; i <= quantidade; i++) {
+    let numero = parseFloat(prompt(`Digite o número ${i}:`));
+
+    if (isNaN(numero)) {
+      alert("Valor inválido. Será considerado 0.");
+      numero = 0;
     }
-    soma += valor;
+
+    soma += numero;
   }
 
-  const media = soma / inputs.length;
-  document.getElementById('resultado').textContent = `Média: ${media.toFixed(2)}`;
+  let media = soma / quantidade;
+
+  alert(`A média dos ${quantidade} números é: ${media}`);
+  console.log(`A média dos ${quantidade} números é: ${media}`);
 }
